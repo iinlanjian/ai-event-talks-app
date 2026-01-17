@@ -61,7 +61,10 @@ document.addEventListener('DOMContentLoaded', () => {
             if (talk.type === 'break') {
                 return true; // Always show breaks
             }
-            return talk.categories.some(cat => cat.toLowerCase().includes(searchTerm));
+            const searchTermLower = e.target.value.toLowerCase();
+            const matchesCategory = talk.categories.some(cat => cat.toLowerCase().includes(searchTermLower));
+            const matchesSpeaker = talk.speakers.some(speaker => speaker.toLowerCase().includes(searchTermLower));
+            return matchesCategory || matchesSpeaker;
         });
         renderSchedule(filteredTalks);
     });
